@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 
-function DefaultTextArea() {
+function DefaultTextArea({ content }) {
   const TextArea = styled.textarea`
-    width: 55%;
-    height: 80%;
+    width: 100%;
+    height: 120%;
     resize: none;
     border: none;
     background-color: #f5f5f5;
@@ -13,9 +13,14 @@ function DefaultTextArea() {
     padding: 1em;
   `;
 
+  const formatingContent = (content) => {
+    return `=====> the inputed number was: ${content.inputedNumber} \n=====> the divisibles list was: ${content.divisibles} \n=====> And the prime numbers list was: ${content.primeDivisibles}`;
+  };
   return (
     <>
-      <TextArea />
+      {content && (
+        <TextArea defaultValue={formatingContent(content)} disabled={true} />
+      )}
     </>
   );
 }

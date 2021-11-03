@@ -9,8 +9,13 @@ import PrimaryButton from "../components/PrimaryButton";
 import SecondaryButton from "../components/SecondaryButton";
 import DefaultInput from "../components/DefaultInput";
 import TextArea from "../components/DefaultTextArea";
+import primeAndDivisibleCalculations from "../services/calculatePrimeAndDivisibles";
 
 function PrimeAndDivisibleNumber() {
+  const [result, setResult] = React.useState("");
+  const [number, setNumber] = React.useState({ value: "" });
+  let inputedNumber = 0;
+
   const MainSection = styled.section`
     background-color: #72a8ad;
     height: 80vh;
@@ -19,6 +24,24 @@ function PrimeAndDivisibleNumber() {
     flex-direction: column;
     align-items: center;
   `;
+  const onclickCalculate = async () => {
+    if (inputedNumber == 0 || inputedNumber === "") {
+      alert("Please enter a valid Number !");
+      return;
+    }
+    const response = await primeAndDivisibleCalculations(inputedNumber);
+    setResult(response);
+  };
+
+  const onChangeNumber = (event) => {
+    inputedNumber = event.value;
+  };
+
+  const onClickClear = () => {
+    setResult(null);
+    setNumber({ value: "" });
+    console.log("onClickClear");
+  };
 
   return (
     <MainSection>
@@ -27,16 +50,20 @@ function PrimeAndDivisibleNumber() {
 
       <RowDiv>
         <DefaultLabel description="Enter a number:" />
-        <DefaultInput typeOfInput="number" />
+        <DefaultInput
+          typeOfInput="number"
+          value={number.value}
+          onChangeEvent={onChangeNumber}
+        />
       </RowDiv>
       <RowHorizontalDiv>
-        <PrimaryButton>Calculate</PrimaryButton>
-        <SecondaryButton>Clear</SecondaryButton>
+        <PrimaryButton onClickEvent={onclickCalculate}>Calculate</PrimaryButton>
+        <SecondaryButton onClickEvent={onClickClear}>Clear</SecondaryButton>
       </RowHorizontalDiv>
-      <RowDiv>
+      <RowHorizontalDiv>
         <DefaultLabel description="Result:" />
-        <TextArea />
-      </RowDiv>
+        <TextArea content={result} />
+      </RowHorizontalDiv>
     </MainSection>
   );
 }

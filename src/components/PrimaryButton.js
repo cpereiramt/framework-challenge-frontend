@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-function PrimaryButton() {
+function PrimaryButton({ onClickEvent }) {
   const PrimaryButton = styled.button`
     background-color: #54a20d;
     color: white;
@@ -14,7 +14,7 @@ function PrimaryButton() {
 
   return (
     <>
-      <PrimaryButton>Calculate</PrimaryButton>
+      <PrimaryButton onClick={() => onClickEvent()}>Calculate</PrimaryButton>
     </>
   );
 }
