@@ -1,24 +1,20 @@
-import logo from './logo.svg';
-import './App.css';
-
+import styled from "styled-components";
+import PrimeAndDivisibleNumber from "./pages/PrimeAndDivisibleNumber";
 function App() {
+  const MainDiv = styled.div`
+    background-color: #f5f5f5;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  `;
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <MainDiv>
+      <PrimeAndDivisibleNumber />
+    </MainDiv>
   );
 }
 
